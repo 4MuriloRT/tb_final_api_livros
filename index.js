@@ -51,4 +51,32 @@ app.delete("/books/:id", (req,res)=>{
         if(err) return res.json(err);
         return res.json("Book has been deleted successfully")
     })
-});
+})
+
+
+app.put("/books/:id", (req,res)=>{
+    const bookId = req.params.id;
+    const q = "update books set `title`=?, `des`=?, `price`=?, `cover`=? where id = ?"
+
+    const values=[
+        req.body.title,
+        req.body.des,
+        req.body.price,
+        req.body.cover
+    ]
+
+    db.query(q, [...values, bookId],(err, data)=>{
+        if(err) return res.json(err);
+        return res.json("Book has been updated successfully")
+    })
+})
+
+app.get("/books/:id", (req, res) => {
+    const bookId = req.params.id;
+    const q = "SELECT * FROM books WHERE id = ?";
+    db.query(q, [bookId], (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data[0]); // Retorna o livro encontrado
+    });
+  });
+  
