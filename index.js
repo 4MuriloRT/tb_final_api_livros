@@ -1,5 +1,5 @@
 import express from "express"
-import mysql, { createConnection } from "mysql"
+import mysql from "mysql2"
 import cors from "cors"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
@@ -16,7 +16,7 @@ app.listen(8800, ()=> {
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "root123", //Usar a senha do seu user root Mysql
     database: "crud_livros"
 })
 
